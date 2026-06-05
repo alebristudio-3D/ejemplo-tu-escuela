@@ -1,0 +1,2655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colegio Lumina — Formando líderes del mañana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===========================
+   VARIABLES & RESET
+=========================== */
+:root {
+  --navy: #0d2137;
+  --navy-deep: #071525;
+  --navy-mid: #163352;
+  --navy-light: #1e4a77;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-pale: #f5e9c8;
+  --cream: #faf7f2;
+  --white: #ffffff;
+  --text-dark: #0d2137;
+  --text-muted: #5a7a9b;
+  --text-light: #8aa5be;
+  --border: rgba(201,168,76,0.25);
+  --shadow-sm: 0 2px 12px rgba(13,33,55,0.08);
+  --shadow-md: 0 8px 32px rgba(13,33,55,0.14);
+  --shadow-lg: 0 20px 60px rgba(13,33,55,0.20);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+a { text-decoration: none; color: inherit; }
+
+img { max-width: 100%; }
+
+section { position: relative; }
+
+/* ===========================
+   UTILITY
+=========================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy-deep);
+  border-color: var(--gold);
+}
+.btn-primary:hover {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255,255,255,0.6);
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: var(--white);
+  transform: translateY(-2px);
+}
+
+.section-label {
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.2;
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 600px;
+}
+
+/* ANIMATIONS */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-up.delay-1 { transition-delay: 0.1s; }
+.fade-up.delay-2 { transition-delay: 0.2s; }
+.fade-up.delay-3 { transition-delay: 0.3s; }
+.fade-up.delay-4 { transition-delay: 0.4s; }
+
+/* ===========================
+   NAVBAR
+=========================== */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  transition: var(--transition);
+}
+
+#navbar.scrolled {
+  background: rgba(13,33,55,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 12px 0;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 1px;
+}
+
+.nav-logo span {
+  color: var(--gold);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  transition: color 0.25s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.25s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+.nav-cta {
+  background: var(--gold);
+  color: var(--navy-deep) !important;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-weight: 600 !important;
+}
+.nav-cta:hover { background: var(--gold-light) !important; }
+.nav-cta::after { display: none !important; }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--navy-deep);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.mobile-menu.open {
+  display: flex;
+  opacity: 1;
+}
+.mobile-menu a {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--white);
+  transition: color 0.25s;
+}
+.mobile-menu a:hover { color: var(--gold); }
+
+/* ===========================
+   HERO
+=========================== */
+#hero {
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(7,21,37,0.92) 0%, rgba(13,33,55,0.80) 50%, rgba(22,51,82,0.88) 100%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(201,168,76,0.03) 40px,
+      rgba(201,168,76,0.03) 80px
+    );
+  background-color: var(--navy);
+  display: flex;
+  align-items: center;
+  padding: 120px 0 80px;
+  overflow: hidden;
+}
+
+/* Simulated video BG elements */
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 80% at 20% 70%, rgba(30,74,119,0.4) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Floating orbs */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.hero-orb-1 {
+  width: 600px; height: 600px;
+  background: rgba(201,168,76,0.06);
+  top: -200px; right: -100px;
+  animation: floatOrb 8s ease-in-out infinite;
+}
+.hero-orb-2 {
+  width: 400px; height: 400px;
+  background: rgba(30,74,119,0.3);
+  bottom: -100px; left: -100px;
+  animation: floatOrb 10s ease-in-out infinite reverse;
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -30px) scale(1.05); }
+  66% { transform: translate(-15px, 15px) scale(0.95); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.35);
+  color: var(--gold-light);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 8px 18px;
+  border-radius: 50px;
+  margin-bottom: 1.5rem;
+  animation: fadeDown 0.8s ease both;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 5.5vw, 4rem);
+  line-height: 1.12;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.9s ease 0.2s both;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  max-width: 580px;
+  animation: fadeUp 0.9s ease 0.4s both;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 4rem;
+  animation: fadeUp 0.9s ease 0.5s both;
+}
+
+/* Stats */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  overflow: hidden;
+  animation: fadeUp 1s ease 0.7s both;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.hero-stat {
+  background: rgba(13,33,55,0.6);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1;
+  display: block;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 4px;
+  display: block;
+  letter-spacing: 0.5px;
+}
+
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.4);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.scroll-hint::before {
+  content: '';
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ===========================
+   PROPUESTA DE VALOR
+=========================== */
+#valor {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+.valor-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.valor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.valor-card {
+  padding: 2.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(13,33,55,0.08);
+  background: var(--cream);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.valor-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.valor-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+.valor-card:hover::before { opacity: 1; }
+.valor-card:hover .valor-icon-wrap { background: rgba(201,168,76,0.2); }
+.valor-card:hover .valor-icon svg { stroke: var(--gold); }
+.valor-card:hover .valor-card-title { color: var(--white); }
+.valor-card:hover .valor-card-text { color: rgba(255,255,255,0.75); }
+.valor-card:hover .valor-tag { background: rgba(201,168,76,0.2); color: var(--gold-light); }
+
+.valor-icon-wrap {
+  width: 60px; height: 60px;
+  background: rgba(13,33,55,0.08);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.valor-icon svg {
+  width: 28px; height: 28px;
+  stroke: var(--navy);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: var(--transition);
+}
+
+.valor-card-title {
+  font-size: 1.3rem;
+  color: var(--navy);
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.valor-card-text {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+  transition: var(--transition);
+  margin-bottom: 1.5rem;
+}
+
+.valor-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.valor-tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 50px;
+  background: rgba(13,33,55,0.07);
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+/* ===========================
+   NIVELES EDUCATIVOS
+=========================== */
+#niveles {
+  padding: 100px 0;
+  background: var(--cream);
+}
+
+.niveles-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.niveles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.nivel-card {
+  height: 380px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.nivel-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  transform-style: preserve-3d;
+}
+
+.nivel-card:hover .nivel-inner {
+  transform: rotateY(180deg);
+}
+
+.nivel-front, .nivel-back {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.nivel-front {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+}
+
+.nivel-back {
+  transform: rotateY(180deg);
+  background: var(--navy);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Front colors */
+.nivel-card:nth-child(1) .nivel-front { background: linear-gradient(160deg, #1a6b4a 0%, #0d4530 100%); }
+.nivel-card:nth-child(2) .nivel-front { background: linear-gradient(160deg, #1a4e8c 0%, #0d2f5e 100%); }
+.nivel-card:nth-child(3) .nivel-front { background: linear-gradient(160deg, #6b2d8c 0%, #3e1a56 100%); }
+.nivel-card:nth-child(4) .nivel-front { background: linear-gradient(160deg, #8c4a1a 0%, #5e2e0d 100%); }
+
+.nivel-icon {
+  width: 56px; height: 56px;
+  margin-bottom: 1rem;
+}
+
+.nivel-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 6px;
+}
+
+.nivel-front h3 {
+  font-size: 1.6rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.nivel-front p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.5;
+}
+
+.flip-hint {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nivel-back .nivel-back-tag {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.nivel-back h3 {
+  font-size: 1.4rem;
+  color: var(--white);
+  margin-bottom: 1.25rem;
+}
+
+.materia-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.materia-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.8);
+}
+
+.materia-list li::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.nivel-back-cta {
+  margin-top: 1.5rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===========================
+   TESTIMONIOS
+=========================== */
+#testimonios {
+  padding: 100px 0;
+  background: var(--navy);
+  overflow: hidden;
+}
+
+.testimonios-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.testimonios-header .section-title { color: var(--white); }
+.testimonios-header .section-subtitle { color: rgba(255,255,255,0.6); }
+
+.carousel-wrap {
+  position: relative;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 2rem;
+  transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+
+.testimonial-card {
+  min-width: calc(50% - 1rem);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  flex-shrink: 0;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 1.25rem;
+}
+
+.star {
+  width: 18px; height: 18px;
+  fill: var(--gold);
+  stroke: none;
+}
+
+.testimonial-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.author-info strong {
+  display: block;
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.author-info span {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.carousel-btn {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.carousel-btn:hover { background: rgba(201,168,76,0.2); border-color: var(--gold); }
+
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.dot.active { background: var(--gold); width: 24px; border-radius: 4px; }
+
+/* ===========================
+   GALERÍA
+=========================== */
+#galeria {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+.galeria-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 260px);
+  gap: 1rem;
+}
+
+.galeria-item {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.galeria-item:hover { transform: scale(1.02); }
+.galeria-item:hover .galeria-overlay { opacity: 1; }
+.galeria-item:hover .galeria-icon svg { transform: scale(1.1); }
+
+/* Unique colored backgrounds */
+.gi-1 { background: linear-gradient(135deg, #1a5276, #0e3460); }
+.gi-2 { background: linear-gradient(135deg, #1e8449, #0d4a28); }
+.gi-3 { background: linear-gradient(135deg, #884ea0, #5b3070); }
+.gi-4 { background: linear-gradient(135deg, #b7950b, #7d6608); }
+.gi-5 { background: linear-gradient(135deg, #c0392b, #922b21); }
+.gi-6 { background: linear-gradient(135deg, #117a65, #0a5347); }
+
+.galeria-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.galeria-icon svg {
+  width: 64px; height: 64px;
+  stroke: rgba(255,255,255,0.2);
+  fill: none;
+  stroke-width: 1;
+  transition: var(--transition);
+}
+
+.galeria-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+  opacity: 0;
+  transition: var(--transition);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+}
+
+.galeria-label {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.25rem;
+}
+
+.galeria-label strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--white);
+}
+.galeria-label span {
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+}
+
+/* Grid spans */
+.galeria-item:nth-child(1) { grid-row: span 2; }
+.galeria-item:nth-child(4) { grid-column: span 2; }
+
+/* ===========================
+   POR QUÉ MODERNIZAR
+=========================== */
+#modernizar {
+  padding: 100px 0;
+  background: var(--cream);
+}
+
+.modernizar-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.modernizar-col-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.col-old .modernizar-col-title {
+  background: rgba(180,0,0,0.08);
+  color: #a00;
+}
+
+.col-new .modernizar-col-title {
+  background: rgba(13,33,55,0.08);
+  color: var(--navy);
+}
+
+.col-old .modernizar-col-title::before {
+  content: '✕';
+  font-size: 16px;
+}
+.col-new .modernizar-col-title::before {
+  content: '✓';
+  font-size: 16px;
+  color: var(--gold);
+}
+
+.modernizar-mockup {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+/* Old site mock */
+.mock-old {
+  background: #f0ebe0;
+  border: 3px solid #ccc;
+  padding: 0;
+  font-family: 'Times New Roman', serif;
+}
+
+.mock-old-nav {
+  background: #003366;
+  padding: 8px 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.mock-old-nav a {
+  color: #ffff00;
+  font-size: 11px;
+  text-decoration: underline;
+}
+.mock-old-body {
+  padding: 12px;
+}
+.mock-old-banner {
+  background: #ffffcc;
+  border: 2px dashed #cc0000;
+  text-align: center;
+  padding: 8px;
+  font-size: 11px;
+  color: #cc0000;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+.mock-old-content {
+  display: flex;
+  gap: 8px;
+}
+.mock-old-sidebar {
+  width: 80px;
+  background: #e8e0d0;
+  border: 1px solid #999;
+  padding: 6px;
+  font-size: 10px;
+}
+.mock-old-sidebar a {
+  display: block;
+  color: #0000cc;
+  text-decoration: underline;
+  margin-bottom: 4px;
+  font-size: 10px;
+}
+.mock-old-main {
+  flex: 1;
+  font-size: 10px;
+  line-height: 1.4;
+  color: #333;
+}
+.mock-old-h {
+  color: #003366;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+.mock-old-counter {
+  background: #ffcccc;
+  border: 1px solid #cc0000;
+  padding: 3px 6px;
+  font-size: 9px;
+  margin-top: 8px;
+  color: #cc0000;
+}
+
+/* New site mock */
+.mock-new {
+  background: var(--navy);
+}
+.mock-new-nav {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.mock-new-logo {
+  font-family: 'Playfair Display', serif;
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+}
+.mock-new-logo span { color: var(--gold); }
+.mock-new-links {
+  display: flex;
+  gap: 12px;
+}
+.mock-new-links a {
+  font-size: 9px;
+  color: rgba(255,255,255,0.7);
+}
+.mock-new-btn {
+  background: var(--gold);
+  color: var(--navy-deep);
+  font-size: 9px;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-weight: 700;
+}
+.mock-new-hero {
+  padding: 24px 16px;
+  text-align: center;
+}
+.mock-new-hero h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--white);
+  font-size: 18px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+.mock-new-hero h2 em { color: var(--gold-light); font-style: italic; }
+.mock-new-hero p {
+  font-size: 10px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 12px;
+}
+.mock-new-btns { display: flex; gap: 8px; justify-content: center; }
+.mock-btn-g {
+  background: var(--gold);
+  color: var(--navy-deep);
+  font-size: 9px;
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-weight: 700;
+}
+.mock-btn-o {
+  border: 1px solid rgba(255,255,255,0.4);
+  color: var(--white);
+  font-size: 9px;
+  padding: 6px 12px;
+  border-radius: 50px;
+}
+.mock-new-cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8px;
+  padding: 8px 16px 16px;
+}
+.mock-new-card {
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.mock-new-card-dot {
+  width: 20px; height: 20px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+.mock-new-card p {
+  font-size: 8px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.4;
+}
+.mock-new-card strong {
+  display: block;
+  font-size: 10px;
+  color: var(--white);
+  margin-bottom: 3px;
+}
+
+.modernizar-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modernizar-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+.mi-icon {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.col-old .mi-icon { background: rgba(180,0,0,0.08); }
+.col-new .mi-icon { background: rgba(13,33,55,0.08); }
+
+.modernizar-cta {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-top: 2rem;
+  padding: 2.5rem;
+  background: var(--navy);
+  border-radius: var(--radius-lg);
+}
+
+.modernizar-cta h3 {
+  color: var(--white);
+  font-size: 1.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.modernizar-cta p {
+  color: rgba(255,255,255,0.65);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ===========================
+   CONTACTO
+=========================== */
+#contacto {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+.contacto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contacto-info h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+
+.contacto-info p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.contacto-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 1.25rem;
+}
+
+.detail-icon {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  background: rgba(13,33,55,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.detail-icon svg {
+  width: 20px; height: 20px;
+  stroke: var(--navy);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.detail-text strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 2px;
+}
+
+.detail-text span {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* Form */
+.form-card {
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  border: 1px solid rgba(13,33,55,0.06);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.field-wrap {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.field-wrap input,
+.field-wrap select,
+.field-wrap textarea {
+  width: 100%;
+  padding: 22px 16px 8px;
+  border: 1.5px solid rgba(13,33,55,0.12);
+  border-radius: var(--radius);
+  background: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.25s;
+  resize: none;
+  appearance: none;
+}
+
+.field-wrap textarea { padding-top: 28px; }
+
+.field-wrap input:focus,
+.field-wrap select:focus,
+.field-wrap textarea:focus {
+  border-color: var(--navy);
+}
+
+.field-wrap input.error,
+.field-wrap select.error,
+.field-wrap textarea.error {
+  border-color: #e74c3c;
+}
+
+.field-wrap input.valid,
+.field-wrap select.valid,
+.field-wrap textarea.valid {
+  border-color: #27ae60;
+}
+
+.field-label {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 15px;
+  color: var(--text-light);
+  pointer-events: none;
+  transition: all 0.2s;
+  background: transparent;
+}
+
+.field-wrap input:focus ~ .field-label,
+.field-wrap input:not(:placeholder-shown) ~ .field-label,
+.field-wrap select:focus ~ .field-label,
+.field-wrap select:not([value=""]) ~ .field-label,
+.field-wrap textarea:focus ~ .field-label,
+.field-wrap textarea:not(:placeholder-shown) ~ .field-label {
+  top: 7px;
+  font-size: 11px;
+  color: var(--navy);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.field-error {
+  font-size: 12px;
+  color: #e74c3c;
+  margin-top: 4px;
+  display: none;
+}
+.field-wrap.has-error .field-error { display: block; }
+
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 0.5rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--navy-mid);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.submit-btn .spinner {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: none;
+}
+
+.submit-btn.loading .spinner { display: block; }
+.submit-btn.loading .btn-text { display: none; }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.success-message {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+  animation: fadeUp 0.5s ease;
+}
+
+.success-message.show { display: block; }
+
+.success-check {
+  width: 64px; height: 64px;
+  background: rgba(39,174,96,0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.success-check svg {
+  width: 32px; height: 32px;
+  stroke: #27ae60;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.success-message h3 {
+  color: var(--navy);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.success-message p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer {
+  background: var(--navy-deep);
+  padding: 80px 0 40px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+.footer-brand .logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.footer-brand .logo span { color: var(--gold); }
+
+.footer-brand p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.socials {
+  display: flex;
+  gap: 10px;
+}
+
+.social-link {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+.social-link:hover { background: rgba(201,168,76,0.2); border-color: rgba(201,168,76,0.4); }
+.social-link svg { width: 16px; height: 16px; fill: none; stroke: rgba(255,255,255,0.7); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+.footer-col h4 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.25rem;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  transition: color 0.25s;
+}
+.footer-col ul li a:hover { color: var(--white); }
+
+.horarios p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.horarios p span {
+  color: rgba(255,255,255,0.8);
+  font-weight: 500;
+}
+
+/* Footer map */
+.footer-map-col h4 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.25rem;
+}
+
+.map-svg-wrap {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-bottom p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+}
+
+.footer-bottom .gold-link {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 1024px) {
+  .valor-grid { grid-template-columns: repeat(3, 1fr); }
+  .niveles-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .modernizar-inner { grid-template-columns: 1fr; }
+  .modernizar-cta { grid-column: 1; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .valor-grid { grid-template-columns: 1fr; }
+
+  .niveles-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .galeria-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+  .galeria-item:nth-child(1) { grid-row: span 1; }
+  .galeria-item:nth-child(4) { grid-column: span 1; }
+
+  .contacto-grid { grid-template-columns: 1fr; }
+
+  .form-row { grid-template-columns: 1fr; }
+
+  .footer-grid { grid-template-columns: 1fr; }
+
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  .testimonial-card { min-width: calc(90vw - 3rem); }
+}
+
+@media (max-width: 480px) {
+  .hero-cta { flex-direction: column; }
+  .hero-cta .btn { width: 100%; justify-content: center; }
+  .niveles-grid { grid-template-columns: 1fr; }
+  .galeria-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========================= NAVBAR ========================= -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <div class="nav-logo">[LOGO DE TU MARCA] <span>Lumina</span></div>
+    <ul class="nav-links">
+      <li><a href="#valor">Propuesta</a></li>
+      <li><a href="#niveles">Niveles</a></li>
+      <li><a href="#galeria">Campus</a></li>
+      <li><a href="#modernizar">Identidad Digital</a></li>
+      <li><a href="#contacto" class="nav-cta">Agenda una visita</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="hamburger open" id="menuClose" style="position:absolute;top:28px;right:24px;" aria-label="Cerrar">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#valor" onclick="closeMobile()">Propuesta</a>
+  <a href="#niveles" onclick="closeMobile()">Niveles</a>
+  <a href="#galeria" onclick="closeMobile()">Campus</a>
+  <a href="#modernizar" onclick="closeMobile()">Identidad Digital</a>
+  <a href="#contacto" onclick="closeMobile()">Contáctanos</a>
+</div>
+
+<!-- ========================= HERO ========================= -->
+<section id="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        Reconocida por la SEP · 35 años formando líderes
+      </div>
+      <h1 class="hero-title">
+        Tu hijo merece una educación que <em>transforme</em> su futuro
+      </h1>
+      <p class="hero-subtitle">
+        En Colegio Lumina combinamos excelencia académica, valores sólidos y bilingüismo para que tus hijos no solo sean buenos estudiantes, sino personas íntegras listas para el mundo que viene.
+      </p>
+      <div class="hero-cta">
+        <a href="#contacto" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Agenda una visita
+        </a>
+        <a href="#niveles" class="btn btn-outline">
+          Ver propuesta académica
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+      <div class="hero-stats" id="statsSection">
+        <div class="hero-stat">
+          <span class="stat-number" data-target="35" data-suffix="+">0</span>
+          <span class="stat-label">Años de experiencia</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-number" data-target="1200" data-suffix="">0</span>
+          <span class="stat-label">Alumnos activos</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-number" data-target="98" data-suffix="%">0</span>
+          <span class="stat-label">Docentes certificados</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-number" data-target="47" data-suffix="">0</span>
+          <span class="stat-label">Reconocimientos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">Explorar</div>
+</section>
+
+<!-- ========================= PROPUESTA DE VALOR ========================= -->
+<section id="valor">
+  <div class="container">
+    <div class="valor-header fade-up">
+      <span class="section-label">Nuestros diferenciadores</span>
+      <h2 class="section-title">Lo que nos hace únicos en la región</h2>
+      <p class="section-subtitle">Sabemos que elegir escuela es una de las decisiones más importantes que tomarás como padre. Por eso construimos un modelo educativo que responde a lo que realmente importa.</p>
+    </div>
+    <div class="valor-grid">
+      <div class="valor-card fade-up delay-1">
+        <div class="valor-icon-wrap">
+          <div class="valor-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+        </div>
+        <h3 class="valor-card-title">Seguridad y bienestar integral</h3>
+        <p class="valor-card-text">Instalaciones con acceso controlado, cámaras de vigilancia, psicólogos en campus y protocolo de seguridad certificado. Tu hijo siempre estará en un entorno seguro donde puede aprender y crecer sin miedos.</p>
+        <div class="valor-tags">
+          <span class="valor-tag">CCTV 24/7</span>
+          <span class="valor-tag">Psicología escolar</span>
+          <span class="valor-tag">Protocolo anti-bullying</span>
+        </div>
+      </div>
+      <div class="valor-card fade-up delay-2">
+        <div class="valor-icon-wrap">
+          <div class="valor-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"></path></svg>
+          </div>
+        </div>
+        <h3 class="valor-card-title">Bilingüismo real, no superficial</h3>
+        <p class="valor-card-text">50% del currículo en inglés con maestros nativos certificados. Nuestros alumnos de preparatoria alcanzan nivel B2–C1 del CEFR, abriendo puertas a universidades nacionales e internacionales.</p>
+        <div class="valor-tags">
+          <span class="valor-tag">Maestros nativos</span>
+          <span class="valor-tag">Certificación Cambridge</span>
+          <span class="valor-tag">Modelo IB compatible</span>
+        </div>
+      </div>
+      <div class="valor-card fade-up delay-3">
+        <div class="valor-icon-wrap">
+          <div class="valor-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+        </div>
+        <h3 class="valor-card-title">Formación en valores y liderazgo</h3>
+        <p class="valor-card-text">Más que calificaciones, formamos carácter. Nuestro programa de liderazgo estudiantil, servicio comunitario y desarrollo emocional garantiza jóvenes responsables, empáticos y seguros de sí mismos.</p>
+        <div class="valor-tags">
+          <span class="valor-tag">Liderazgo estudiantil</span>
+          <span class="valor-tag">Servicio social</span>
+          <span class="valor-tag">Inteligencia emocional</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= NIVELES EDUCATIVOS ========================= -->
+<section id="niveles">
+  <div class="container">
+    <div class="niveles-header fade-up">
+      <span class="section-label">Etapas educativas</span>
+      <h2 class="section-title">Un acompañamiento para cada etapa de tu hijo</h2>
+      <p class="section-subtitle">Desde los primeros años de vida hasta la preparación universitaria, tenemos el programa ideal. <strong>Pasa el cursor</strong> sobre cada nivel para ver qué aprenden.</p>
+    </div>
+    <div class="niveles-grid">
+      <!-- Preescolar -->
+      <div class="nivel-card fade-up delay-1">
+        <div class="nivel-inner">
+          <div class="nivel-front">
+            <div class="flip-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M1 4v6h6"></path><path d="M23 20v-6h-6"></path><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg>
+            </div>
+            <svg class="nivel-icon" viewBox="0 0 80 80" fill="none">
+              <circle cx="40" cy="30" r="18" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+              <path d="M25 55 Q40 45 55 55" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none"/>
+              <circle cx="30" cy="26" r="3" fill="rgba(255,255,255,0.8)"/>
+              <circle cx="50" cy="26" r="3" fill="rgba(255,255,255,0.8)"/>
+              <path d="M33 36 Q40 42 47 36" stroke="rgba(255,255,255,0.8)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            <span class="nivel-tag">1 – 3 años</span>
+            <h3>Preescolar</h3>
+            <p>Estimulación temprana, juego libre y primer contacto con el inglés en un ambiente de amor y seguridad.</p>
+          </div>
+          <div class="nivel-back">
+            <span class="nivel-back-tag">Preescolar · 1–3 años</span>
+            <h3>Lo que aprenden</h3>
+            <ul class="materia-list">
+              <li>Estimulación temprana Montessori</li>
+              <li>Iniciación al inglés (inmersión lúdica)</li>
+              <li>Expresión artística y musical</li>
+              <li>Psicomotricidad y coordinación</li>
+              <li>Hábitos de higiene y autonomía</li>
+              <li>Socialización y empatía</li>
+            </ul>
+            <a href="#contacto" class="nivel-back-cta">Conocer más →</a>
+          </div>
+        </div>
+      </div>
+      <!-- Primaria -->
+      <div class="nivel-card fade-up delay-2">
+        <div class="nivel-inner">
+          <div class="nivel-front">
+            <div class="flip-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M1 4v6h6"></path><path d="M23 20v-6h-6"></path><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg>
+            </div>
+            <svg class="nivel-icon" viewBox="0 0 80 80" fill="none">
+              <rect x="15" y="20" width="50" height="45" rx="4" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+              <path d="M25 35 H55" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round"/>
+              <path d="M25 43 H48" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
+              <path d="M25 51 H52" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
+              <path d="M32 15 L40 22 L48 15" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="nivel-tag">6 – 12 años</span>
+            <h3>Primaria</h3>
+            <p>Bases sólidas en lectura, matemáticas y ciencias con metodología activa que despierta la curiosidad natural.</p>
+          </div>
+          <div class="nivel-back">
+            <span class="nivel-back-tag">Primaria · 6–12 años</span>
+            <h3>Lo que aprenden</h3>
+            <ul class="materia-list">
+              <li>Español avanzado y comprensión lectora</li>
+              <li>Matemáticas con pensamiento lógico</li>
+              <li>Ciencias naturales y experimentación</li>
+              <li>Inglés intensivo (50% del día)</li>
+              <li>Historia, geografía y civismo</li>
+              <li>Computación e introducción a STEM</li>
+            </ul>
+            <a href="#contacto" class="nivel-back-cta">Conocer más →</a>
+          </div>
+        </div>
+      </div>
+      <!-- Secundaria -->
+      <div class="nivel-card fade-up delay-3">
+        <div class="nivel-inner">
+          <div class="nivel-front">
+            <div class="flip-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M1 4v6h6"></path><path d="M23 20v-6h-6"></path><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg>
+            </div>
+            <svg class="nivel-icon" viewBox="0 0 80 80" fill="none">
+              <path d="M40 15 L65 28 V42 C65 55 53 63 40 67 C27 63 15 55 15 42 V28 Z" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none"/>
+              <path d="M30 40 L37 47 L52 32" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="nivel-tag">12 – 15 años</span>
+            <h3>Secundaria</h3>
+            <p>Pensamiento crítico, proyectos interdisciplinarios y desarrollo de identidad en la etapa más crucial de su crecimiento.</p>
+          </div>
+          <div class="nivel-back">
+            <span class="nivel-back-tag">Secundaria · 12–15 años</span>
+            <h3>Lo que aprenden</h3>
+            <ul class="materia-list">
+              <li>Matemáticas y álgebra avanzada</li>
+              <li>Biología, química y física básica</li>
+              <li>Literatura mexicana e hispanoamericana</li>
+              <li>Inglés nivel B1 certificado</li>
+              <li>Programación y robótica</li>
+              <li>Arte, teatro y expresión corporal</li>
+            </ul>
+            <a href="#contacto" class="nivel-back-cta">Conocer más →</a>
+          </div>
+        </div>
+      </div>
+      <!-- Preparatoria -->
+      <div class="nivel-card fade-up delay-4">
+        <div class="nivel-inner">
+          <div class="nivel-front">
+            <div class="flip-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M1 4v6h6"></path><path d="M23 20v-6h-6"></path><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg>
+            </div>
+            <svg class="nivel-icon" viewBox="0 0 80 80" fill="none">
+              <path d="M40 18 L60 30 L60 50 L40 62 L20 50 L20 30 Z" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none"/>
+              <circle cx="40" cy="40" r="10" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
+              <circle cx="40" cy="40" r="3" fill="rgba(255,255,255,0.9)"/>
+            </svg>
+            <span class="nivel-tag">15 – 18 años</span>
+            <h3>Preparatoria</h3>
+            <p>Orientación universitaria, liderazgo estudiantil e inglés nivel C1 para garantizar la admisión a las mejores universidades.</p>
+          </div>
+          <div class="nivel-back">
+            <span class="nivel-back-tag">Preparatoria · 15–18 años</span>
+            <h3>Lo que aprenden</h3>
+            <ul class="materia-list">
+              <li>Cálculo y estadística universitaria</li>
+              <li>Química, física y biología avanzadas</li>
+              <li>Filosofía, ética y pensamiento crítico</li>
+              <li>Inglés B2–C1 (Cambridge / TOEFL prep)</li>
+              <li>Emprendimiento e innovación</li>
+              <li>Orientación vocacional y universitaria</li>
+            </ul>
+            <a href="#contacto" class="nivel-back-cta">Conocer más →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= TESTIMONIOS ========================= -->
+<section id="testimonios">
+  <div class="container">
+    <div class="testimonios-header fade-up">
+      <span class="section-label" style="color:var(--gold-light);">Lo que dicen las familias</span>
+      <h2 class="section-title">Más de 1,200 familias ya confían en nosotros</h2>
+      <p class="section-subtitle">No tomamos nuestra reputación a la ligera. Estos son los comentarios reales de padres que tomaron la decisión de unirse a la comunidad Lumina.</p>
+    </div>
+    <div class="carousel-wrap fade-up">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Card 1 -->
+        <div class="testimonial-card">
+          <div class="stars">
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-text">"Lo que más me convenció fue ver cómo mi hija llegaba a casa contando lo que aprendió en inglés. En su escuela anterior solo memorizaba. Aquí realmente aprende a pensar. Lleva dos años y su transformación es impresionante. Es más segura, más curiosa y sus calificaciones son las mejores de su grupo."</p>
+          <div class="testimonial-author">
+            <div class="avatar" style="background:#1a5276;">MG</div>
+            <div class="author-info">
+              <strong>Marcela González</strong>
+              <span>Mamá de Sofía, 4° de Primaria · 2 años en Lumina</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="testimonial-card">
+          <div class="stars">
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-text">"Como padre, mi mayor miedo era el bullying. En Lumina hay un protocolo claro y los maestros conocen a los alumnos por nombre. Mi hijo tiene autismo leve y el apoyo que recibe del departamento psicopedagógico es extraordinario. Nunca pensé encontrar una escuela así en nuestra ciudad."</p>
+          <div class="testimonial-author">
+            <div class="avatar" style="background:#1e8449;">RP</div>
+            <div class="author-info">
+              <strong>Roberto Pacheco</strong>
+              <span>Papá de Emilio, 2° de Secundaria · 4 años en Lumina</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="testimonial-card">
+          <div class="stars">
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-text">"Mi hija entró a preparatoria ya con un nivel de inglés que le abrió las puertas de una universidad en Monterrey. Lo que inviertes en Lumina no es un gasto, es la diferencia entre que tu hijo compita con ventaja o con desventaja. La comunicación con los maestros por la app es excelente."</p>
+          <div class="testimonial-author">
+            <div class="avatar" style="background:#884ea0;">LV</div>
+            <div class="author-info">
+              <strong>Laura Villanueva</strong>
+              <span>Mamá de Andrea, egresada Prepa · 8 años en Lumina</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="testimonial-card">
+          <div class="stars">
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-text">"Vinimos de otra ciudad y lo primero que hicimos fue visitar 5 escuelas. Lumina fue la única donde el director nos recibió personalmente y nos explicó el proyecto educativo con pasión. La infraestructura es impecable: laboratorio, sala de teatro, canchas. Vale cada peso de la colegiatura."</p>
+          <div class="testimonial-author">
+            <div class="avatar" style="background:#b7950b;">CE</div>
+            <div class="author-info">
+              <strong>Carlos y Elena Morales</strong>
+              <span>Padres de Mateo, 1° de Primaria · 1 año en Lumina</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="prevBtn" aria-label="Anterior">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <div class="carousel-dots" id="carouselDots">
+          <div class="dot active" data-idx="0"></div>
+          <div class="dot" data-idx="1"></div>
+          <div class="dot" data-idx="2"></div>
+          <div class="dot" data-idx="3"></div>
+        </div>
+        <button class="carousel-btn" id="nextBtn" aria-label="Siguiente">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= GALERÍA ========================= -->
+<section id="galeria">
+  <div class="container">
+    <div class="galeria-header fade-up">
+      <span class="section-label">Nuestras instalaciones</span>
+      <h2 class="section-title">Un campus diseñado para inspirar</h2>
+      <p class="section-subtitle">Cada espacio en Lumina fue pensado para estimular la creatividad, el aprendizaje y el bienestar de nuestros alumnos.</p>
+    </div>
+    <div class="galeria-grid fade-up">
+      <!-- 1 -->
+      <div class="galeria-item gi-1">
+        <div class="galeria-icon">
+          <svg viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="35" r="18" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            <path d="M20 80 Q35 55 50 60 Q65 65 80 80" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none"/>
+            <line x1="40" y1="35" x2="60" y2="35" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+            <line x1="50" y1="25" x2="50" y2="45" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+            <circle cx="50" cy="35" r="5" fill="rgba(255,255,255,0.3)"/>
+          </svg>
+        </div>
+        <div class="galeria-label">
+          <strong>Laboratorio de Ciencias</strong>
+          <span>Equipado con material de vanguardia</span>
+        </div>
+        <div class="galeria-overlay">
+          <span style="color:white;font-size:14px;font-weight:600;">Laboratorio de Ciencias →</span>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="galeria-item gi-2">
+        <div class="galeria-icon">
+          <svg viewBox="0 0 100 100" fill="none">
+            <rect x="25" y="40" width="50" height="35" rx="4" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            <path d="M35 40 L50 20 L65 40" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none"/>
+            <circle cx="50" cy="58" r="8" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="galeria-label">
+          <strong>Canchas Deportivas</strong>
+          <span>Fútbol, baloncesto, voleibol y atletismo</span>
+        </div>
+        <div class="galeria-overlay">
+          <span style="color:white;font-size:14px;font-weight:600;">Canchas Deportivas →</span>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="galeria-item gi-3">
+        <div class="galeria-icon">
+          <svg viewBox="0 0 100 100" fill="none">
+            <path d="M30 70 Q30 40 50 30 Q70 20 70 50 Q70 70 50 75" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none"/>
+            <circle cx="55" cy="55" r="12" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+            <line x1="40" y1="35" x2="30" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="galeria-label">
+          <strong>Taller de Arte</strong>
+          <span>Pintura, escultura y diseño digital</span>
+        </div>
+        <div class="galeria-overlay">
+          <span style="color:white;font-size:14px;font-weight:600;">Taller de Arte →</span>
+        </div>
+      </div>
+      <!-- 4 (span 2) -->
+      <div class="galeria-item gi-4">
+        <div class="galeria-icon">
+          <svg viewBox="0 0 100 100" fill="none">
+            <rect x="15" y="20" width="70" height="55" rx="4" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+            <line x1="25" y1="35" x2="75" y2="35" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <line x1="25" y1="45" x2="65" y2="45" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <line x1="25" y1="55" x2="70" y2="55" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <line x1="25" y1="65" x2="60" y2="65" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <path d="M60 15 L75 25 L60 25 Z" fill="rgba(255,255,255,0.3)"/>
+          </svg>
+        </div>
+        <div class="galeria-label">
+          <strong>Biblioteca y Centro de Recursos</strong>
+          <span>Más de 8,000 títulos físicos y digitales</span>
+        </div>
+        <div class="galeria-overlay">
+          <span style="color:white;font-size:14px;font-weight:600;">Biblioteca →</span>
+        </div>
+      </div>
+      <!-- 5 -->
+      <div class="galeria-item gi-5">
+        <div class="galeria-icon">
+          <svg viewBox="0 0 100 100" fill="none">
+            <path d="M20 75 L20 45 L50 25 L80 45 L80 75" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none"/>
+            <rect x="38" y="55" width="24" height="20" rx="2" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            <circle cx="35" cy="50" r="5" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+            <circle cx="65" cy="50" r="5" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="galeria-label">
+          <strong>Teatro y Auditorio</strong>
+          <span>Capacidad para 400 personas</span>
+        </div>
+        <div class="galeria-overlay">
+          <span style="color:white;font-size:14px;font-weight:600;">Teatro →</span>
+        </div>
+      </div>
+      <!-- 6 -->
+      <div class="galeria-item gi-6">
+        <div class="galeria-icon">
+          <svg viewBox="0 0 100 100" fill="none">
+            <rect x="20" y="25" width="28" height="20" rx="3" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            <rect x="52" y="25" width="28" height="20" rx="3" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            <rect x="20" y="55" width="28" height="20" rx="3" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+            <rect x="52" y="55" width="28" height="20" rx="3" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+            <circle cx="34" cy="35" r="5" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+            <circle cx="66" cy="35" r="5" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="galeria-label">
+          <strong>Laboratorio de Tecnología</strong>
+          <span>40 estaciones Mac + realidad virtual</span>
+        </div>
+        <div class="galeria-overlay">
+          <span style="color:white;font-size:14px;font-weight:600;">Lab de Tecnología →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= MODERNIZAR ========================= -->
+<section id="modernizar">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem;" class="fade-up">
+      <span class="section-label">Identidad digital</span>
+      <h2 class="section-title">¿Tu colegio tiene la imagen que merece?</h2>
+      <p class="section-subtitle" style="margin:0 auto;">Los padres de hoy investigan en línea antes de llamar. Si tu sitio web no genera confianza inmediata, estás perdiendo inscripciones sin saberlo.</p>
+    </div>
+    <div class="modernizar-inner fade-up">
+      <!-- Columna izquierda: sitio viejo -->
+      <div class="col-old">
+        <div class="modernizar-col-title">Sitio web desactualizado</div>
+        <div class="modernizar-mockup mock-old">
+          <div class="mock-old-nav">
+            <a href="#">Inicio</a>
+            <a href="#">Nosotros</a>
+            <a href="#">Niveles</a>
+            <a href="#">Contacto</a>
+            <a href="#">Mapa del sitio</a>
+          </div>
+          <div class="mock-old-body">
+            <div class="mock-old-banner">🔔 INSCRIPCIONES ABIERTAS 2025 — CUPO LIMITADO</div>
+            <div class="mock-old-content">
+              <div class="mock-old-sidebar">
+                <strong style="font-size:10px;display:block;margin-bottom:6px;">SECCIONES</strong>
+                <a href="#">▶ Preescolar</a>
+                <a href="#">▶ Primaria</a>
+                <a href="#">▶ Secundaria</a>
+                <a href="#">▶ Preparatoria</a>
+                <a href="#">▶ Galería</a>
+                <a href="#">▶ Solicitud</a>
+              </div>
+              <div class="mock-old-main">
+                <div class="mock-old-h">Bienvenidos al Colegio</div>
+                <p>Somos una institución educativa con más de 30 años de experiencia formando a las nuevas generaciones con valores y excelencia académica. Ofrecemos educación de calidad en todos los niveles...</p>
+                <div class="mock-old-counter">Visitas: 004,821</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="modernizar-list">
+          <li>
+            <span class="mi-icon">❌</span>
+            <span>Sin optimización para Google: los padres no te encuentran cuando buscan "colegio privado" en tu ciudad</span>
+          </li>
+          <li>
+            <span class="mi-icon">❌</span>
+            <span>Se ve mal en celular: 78% de los padres investigan desde su smartphone</span>
+          </li>
+          <li>
+            <span class="mi-icon">❌</span>
+            <span>Sin formulario de contacto funcional ni seguimiento de prospectos</span>
+          </li>
+          <li>
+            <span class="mi-icon">❌</span>
+            <span>Imagen anticuada que comunica desatención y falta de inversión</span>
+          </li>
+          <li>
+            <span class="mi-icon">❌</span>
+            <span>Sin sección de testimonios ni prueba social que genere confianza</span>
+          </li>
+        </ul>
+      </div>
+      <!-- Columna derecha: sitio nuevo -->
+      <div class="col-new">
+        <div class="modernizar-col-title">Sitio web moderno (como este)</div>
+        <div class="modernizar-mockup mock-new">
+          <div class="mock-new-nav">
+            <span class="mock-new-logo">[LOGO DE TU MARCA] <span>Lumina</span></span>
+            <div class="mock-new-links">
+              <a>Propuesta</a>
+              <a>Niveles</a>
+              <a>Campus</a>
+            </div>
+            <span class="mock-new-btn">Agenda</span>
+          </div>
+          <div class="mock-new-hero">
+            <h2>Tu hijo merece una educación que <em>transforme</em></h2>
+            <p>Bilingüismo · Valores · Excelencia académica · Seguridad</p>
+            <div class="mock-new-btns">
+              <span class="mock-btn-g">Agenda una visita</span>
+              <span class="mock-btn-o">Ver propuesta</span>
+            </div>
+          </div>
+          <div class="mock-new-cards">
+            <div class="mock-new-card">
+              <div class="mock-new-card-dot" style="background:#c9a84c;"></div>
+              <strong>Bilingüismo real</strong>
+              <p>Maestros nativos certificados Cambridge</p>
+            </div>
+            <div class="mock-new-card">
+              <div class="mock-new-card-dot" style="background:#1e8449;"></div>
+              <strong>Seguridad</strong>
+              <p>CCTV y psicólogos en campus todo el día</p>
+            </div>
+            <div class="mock-new-card">
+              <div class="mock-new-card-dot" style="background:#884ea0;"></div>
+              <strong>Liderazgo</strong>
+              <p>Formación integral en valores y carácter</p>
+            </div>
+          </div>
+        </div>
+        <ul class="modernizar-list">
+          <li>
+            <span class="mi-icon">✅</span>
+            <span><strong>SEO optimizado:</strong> apareces en las primeras posiciones cuando buscan "colegio privado" + tu ciudad</span>
+          </li>
+          <li>
+            <span class="mi-icon">✅</span>
+            <span><strong>100% responsive:</strong> se ve perfecto en celular, tablet y computadora</span>
+          </li>
+          <li>
+            <span class="mi-icon">✅</span>
+            <span><strong>Formulario inteligente</strong> que captura leads y los envía a tu WhatsApp o CRM</span>
+          </li>
+          <li>
+            <span class="mi-icon">✅</span>
+            <span><strong>Imagen de marca premium</strong> que proyecta confianza desde el primer segundo</span>
+          </li>
+          <li>
+            <span class="mi-icon">✅</span>
+            <span><strong>Testimonios y prueba social</strong> que convierten visitantes en inscripciones</span>
+          </li>
+        </ul>
+      </div>
+      <!-- CTA de modernización -->
+      <div class="modernizar-cta fade-up">
+        <h3>¿Quieres un sitio como este para tu colegio?</h3>
+        <p>Este sitio es una muestra de lo que podemos crear para tu institución. Personalizado con tus colores, logo, contenido y funcionalidades específicas.</p>
+        <a href="#contacto" class="btn btn-primary" style="margin:0 auto;">Solicitar mi propuesta gratis →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= CONTACTO ========================= -->
+<section id="contacto">
+  <div class="container">
+    <div class="contacto-grid">
+      <div class="contacto-info fade-up">
+        <span class="section-label">Hablemos</span>
+        <h2>¿Listo para dar el siguiente paso?</h2>
+        <p>Agenda una visita guiada sin compromiso. Conocerás nuestras instalaciones, hablarás con los directivos y resolverás todas tus dudas. La mejor decisión se toma con información completa.</p>
+        <div class="contacto-detail">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.77-.77a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </div>
+          <div class="detail-text">
+            <strong>Teléfono / WhatsApp</strong>
+            <span>[TELÉFONO]</span>
+          </div>
+        </div>
+        <div class="contacto-detail">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
+          <div class="detail-text">
+            <strong>Correo electrónico</strong>
+            <span>[CORREO]</span>
+          </div>
+        </div>
+        <div class="contacto-detail">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <div class="detail-text">
+            <strong>Dirección</strong>
+            <span>[DIRECCIÓN]</span>
+          </div>
+        </div>
+        <div class="contacto-detail">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <div class="detail-text">
+            <strong>Horario de oficina</strong>
+            <span>Lunes a Viernes · 7:30 am – 3:30 pm</span>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up delay-2">
+        <div class="form-card" id="formCard">
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="field-wrap">
+                <input type="text" id="nombre" name="nombre" placeholder=" " autocomplete="given-name">
+                <label class="field-label" for="nombre">Nombre completo</label>
+                <span class="field-error">Por favor ingresa tu nombre</span>
+              </div>
+              <div class="field-wrap">
+                <input type="text" id="apellido" name="apellido" placeholder=" " autocomplete="family-name">
+                <label class="field-label" for="apellido">Apellido</label>
+                <span class="field-error">Por favor ingresa tu apellido</span>
+              </div>
+            </div>
+            <div class="field-wrap">
+              <input type="email" id="email" name="email" placeholder=" " autocomplete="email">
+              <label class="field-label" for="email">Correo electrónico</label>
+              <span class="field-error">Ingresa un correo válido</span>
+            </div>
+            <div class="field-wrap">
+              <input type="tel" id="telefono" name="telefono" placeholder=" " autocomplete="tel">
+              <label class="field-label" for="telefono">Teléfono / WhatsApp</label>
+              <span class="field-error">Ingresa un teléfono válido</span>
+            </div>
+            <div class="field-wrap">
+              <select id="nivel" name="nivel">
+                <option value="" disabled selected></option>
+                <option>Preescolar (1–3 años)</option>
+                <option>Primaria (6–12 años)</option>
+                <option>Secundaria (12–15 años)</option>
+                <option>Preparatoria (15–18 años)</option>
+                <option>Más de un nivel</option>
+              </select>
+              <label class="field-label" for="nivel">Nivel de interés</label>
+              <span class="field-error">Selecciona un nivel</span>
+            </div>
+            <div class="field-wrap">
+              <textarea id="mensaje" name="mensaje" rows="3" placeholder=" "></textarea>
+              <label class="field-label" for="mensaje">¿Alguna pregunta o comentario? (opcional)</label>
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <span class="btn-text">Enviar solicitud de visita</span>
+              <div class="spinner"></div>
+            </button>
+          </form>
+        </div>
+        <div class="success-message" id="successMessage">
+          <div class="success-check">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h3>¡Solicitud enviada!</h3>
+          <p>Nos comunicaremos contigo en las próximas <strong>24 horas</strong> para confirmar tu visita. Mientras tanto, si tienes urgencia puedes escribirnos por WhatsApp al <strong>[TELÉFONO]</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= FOOTER ========================= -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <span class="logo">[LOGO DE TU MARCA] <span>Lumina</span></span>
+        <p>Más de 35 años formando líderes con excelencia académica, valores sólidos y bilingüismo. La mejor inversión para el futuro de tu hijo.</p>
+        <div class="socials">
+          <!-- Facebook -->
+          <a href="#" class="social-link" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          </a>
+          <!-- Instagram -->
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <!-- YouTube -->
+          <a href="#" class="social-link" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.94A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Links -->
+      <div class="footer-col">
+        <h4>Colegio</h4>
+        <ul>
+          <li><a href="#valor">Propuesta de valor</a></li>
+          <li><a href="#niveles">Niveles educativos</a></li>
+          <li><a href="#galeria">Instalaciones</a></li>
+          <li><a href="#">Modelo pedagógico</a></li>
+          <li><a href="#">Cuerpo docente</a></li>
+          <li><a href="#">Certificaciones SEP</a></li>
+        </ul>
+      </div>
+      <!-- Horarios -->
+      <div class="footer-col horarios">
+        <h4>Horarios</h4>
+        <p>Preescolar <span>7:30 – 13:00</span></p>
+        <p>Primaria <span>7:30 – 14:30</span></p>
+        <p>Secundaria <span>7:00 – 14:30</span></p>
+        <p>Preparatoria <span>7:00 – 15:00</span></p>
+        <br>
+        <p style="font-size:12px;color:rgba(255,255,255,0.35);justify-content:flex-start;">Oficinas: Lun–Vie 7:30–15:30</p>
+        <br>
+        <p style="color:var(--gold);font-size:13px;justify-content:flex-start;font-weight:600;">📞 [TELÉFONO]</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.5);justify-content:flex-start;">✉ [CORREO]</p>
+      </div>
+      <!-- Mapa -->
+      <div class="footer-map-col">
+        <h4>Ubicación</h4>
+        <div class="map-svg-wrap">
+          <svg viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+            <!-- Fondo -->
+            <rect width="280" height="180" fill="#0a1f35"/>
+            <!-- Calles -->
+            <line x1="0" y1="90" x2="280" y2="90" stroke="#1a3456" stroke-width="16"/>
+            <line x1="140" y1="0" x2="140" y2="180" stroke="#1a3456" stroke-width="16"/>
+            <line x1="0" y1="45" x2="280" y2="45" stroke="#162d4a" stroke-width="8"/>
+            <line x1="0" y1="135" x2="280" y2="135" stroke="#162d4a" stroke-width="8"/>
+            <line x1="70" y1="0" x2="70" y2="180" stroke="#162d4a" stroke-width="8"/>
+            <line x1="210" y1="0" x2="210" y2="180" stroke="#162d4a" stroke-width="8"/>
+            <!-- Manzanas / bloques -->
+            <rect x="8" y="8" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="78" y="8" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="148" y="8" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="218" y="8" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="8" y="53" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="78" y="53" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="148" y="53" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="218" y="53" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="8" y="98" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="78" y="98" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="148" y="98" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="218" y="98" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="8" y="143" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="78" y="143" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="148" y="143" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <rect x="218" y="143" width="54" height="30" rx="3" fill="#1e4a6e" opacity="0.5"/>
+            <!-- Marcador del colegio -->
+            <circle cx="140" cy="90" r="18" fill="rgba(201,168,76,0.2)"/>
+            <circle cx="140" cy="90" r="10" fill="var(--gold, #c9a84c)"/>
+            <circle cx="140" cy="90" r="4" fill="white"/>
+            <!-- Pin shadow -->
+            <ellipse cx="140" cy="108" rx="8" ry="3" fill="rgba(0,0,0,0.3)"/>
+            <!-- Label -->
+            <rect x="92" y="113" width="96" height="22" rx="4" fill="#c9a84c"/>
+            <text x="140" y="128" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" font-weight="700" fill="#071525">Colegio Lumina</text>
+          </svg>
+        </div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:8px;">[DIRECCIÓN]</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Colegio Lumina. Todos los derechos reservados. · Sitio creado por <span class="gold-link">[LOGO DE TU MARCA]</span></p>
+      <p>
+        <a href="#" style="color:rgba(255,255,255,0.3);font-size:12px;margin-right:1rem;">Aviso de Privacidad</a>
+        <a href="#" style="color:rgba(255,255,255,0.3);font-size:12px;">Términos de Uso</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ========================= JAVASCRIPT ========================= -->
+<script>
+/* ---- NAVBAR ---- */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ---- HAMBURGER ---- */
+const hamburger = document.getElementById('hamburger');
+const menuClose  = document.getElementById('menuClose');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+
+menuClose.addEventListener('click', closeMobile);
+function closeMobile() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ---- INTERSECTION OBSERVER: fade-up & count-up ---- */
+let statsAnimated = false;
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+/* Stats count-up */
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !statsAnimated) {
+      statsAnimated = true;
+      animateStats();
+    }
+  });
+}, { threshold: 0.5 });
+
+const statsSection = document.getElementById('statsSection');
+if (statsSection) statsObserver.observe(statsSection);
+
+function animateStats() {
+  document.querySelectorAll('.stat-number').forEach(el => {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const steps = 60;
+    const step = target / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = Math.round(current).toLocaleString('es-MX') + suffix;
+      if (current >= target) clearInterval(timer);
+    }, duration / steps);
+  });
+}
+
+/* ---- CAROUSEL ---- */
+const track = document.getElementById('carouselTrack');
+const dots  = document.querySelectorAll('.dot');
+const cards = document.querySelectorAll('.testimonial-card');
+let current = 0;
+let autoTimer;
+
+function getSlideWidth() {
+  return window.innerWidth <= 768 ? 1 : 2;
+}
+
+function goTo(idx) {
+  const visible = getSlideWidth();
+  const max = cards.length - visible;
+  current = Math.max(0, Math.min(idx, max));
+  const cardW = track.parentElement.offsetWidth;
+  const gap = 32;
+  const offset = current * (cardW / visible + (visible > 1 ? gap / 2 : gap / visible));
+  // Simpler: get actual card offsetLeft
+  const targetCard = cards[current];
+  track.style.transform = `translateX(-${targetCard.offsetLeft - 0}px)`;
+  dots.forEach((d, i) => d.classList.toggle('active', i === current));
+}
+
+document.getElementById('prevBtn').addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+document.getElementById('nextBtn').addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.idx); resetTimer(); }));
+
+function startTimer() {
+  autoTimer = setInterval(() => {
+    const visible = getSlideWidth();
+    const next = (current + 1) > (cards.length - visible) ? 0 : current + 1;
+    goTo(next);
+  }, 4500);
+}
+
+function resetTimer() { clearInterval(autoTimer); startTimer(); }
+
+// Pause on hover
+track.addEventListener('mouseenter', () => clearInterval(autoTimer));
+track.addEventListener('mouseleave', startTimer);
+
+window.addEventListener('resize', () => { goTo(current); });
+
+startTimer();
+
+/* ---- FORM VALIDATION ---- */
+const form       = document.getElementById('contactForm');
+const submitBtn  = document.getElementById('submitBtn');
+const successMsg = document.getElementById('successMessage');
+const formCard   = document.getElementById('formCard');
+
+function validateField(input) {
+  const wrap = input.closest('.field-wrap');
+  let valid = true;
+
+  if (input.type === 'email') {
+    valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
+  } else if (input.type === 'tel') {
+    valid = /^[\d\s\-\+\(\)]{7,15}$/.test(input.value.trim());
+  } else if (input.tagName === 'SELECT') {
+    valid = input.value !== '';
+  } else if (input.required !== false) {
+    valid = input.value.trim().length >= 2;
+  }
+
+  if (!input.value.trim() && input.tagName !== 'SELECT' && input.id !== 'mensaje') valid = false;
+
+  wrap.classList.toggle('has-error', !valid);
+  input.classList.toggle('error', !valid);
+  input.classList.toggle('valid', valid && input.value.trim() !== '');
+  return valid;
+}
+
+// Real-time validation
+form.querySelectorAll('input, select, textarea').forEach(field => {
+  field.addEventListener('blur', () => validateField(field));
+  field.addEventListener('input', () => {
+    if (field.classList.contains('error') || field.classList.contains('valid')) {
+      validateField(field);
+    }
+  });
+});
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const fields = ['nombre', 'apellido', 'email', 'telefono', 'nivel'];
+  let allValid = true;
+
+  fields.forEach(id => {
+    const f = document.getElementById(id);
+    if (!validateField(f)) allValid = false;
+  });
+
+  if (!allValid) return;
+
+  // Loading state
+  submitBtn.disabled = true;
+  submitBtn.classList.add('loading');
+
+  // Simulate send
+  setTimeout(() => {
+    submitBtn.classList.remove('loading');
+    form.style.display = 'none';
+    successMsg.classList.add('show');
+  }, 2200);
+});
+
+/* ---- SMOOTH SCROLL ---- */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      window.scrollTo({
+        top: target.offsetTop - offset,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
+
+/* ---- SELECT LABEL FIX ---- */
+document.getElementById('nivel').addEventListener('change', function() {
+  validateField(this);
+});
+</script>
+</body>
+</html>
