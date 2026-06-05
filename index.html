@@ -924,65 +924,170 @@ section { position: relative; }
 .galeria-item:nth-child(4) { grid-column: span 2; }
 
 /* ===========================
-   POR QUÉ MODERNIZAR
+   POR QUÉ MODERNIZAR — diseño diferenciado
 =========================== */
 #modernizar {
-  padding: 100px 0;
-  background: var(--cream);
+  padding: 0;
+  background: #060f1c;
+  position: relative;
+  overflow: hidden;
 }
 
-.modernizar-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
+/* Textura de fondo con líneas diagonales doradas */
+#modernizar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 60px,
+      rgba(201,168,76,0.025) 60px,
+      rgba(201,168,76,0.025) 61px
+    );
+  pointer-events: none;
 }
 
-.modernizar-col-title {
-  display: flex;
+/* Orbe dorado ambiental */
+#modernizar::after {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.mod-wrap {
+  position: relative;
+  z-index: 2;
+  padding: 100px 0 0;
+}
+
+/* Header de sección */
+.mod-header {
+  text-align: center;
+  padding: 0 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.mod-eyebrow {
+  display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 14px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold-light);
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  padding: 10px 16px;
-  border-radius: 8px;
+  padding: 8px 20px;
+  border-radius: 50px;
   margin-bottom: 1.5rem;
 }
 
-.col-old .modernizar-col-title {
-  background: rgba(180,0,0,0.08);
-  color: #a00;
+.mod-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 1rem;
 }
 
-.col-new .modernizar-col-title {
-  background: rgba(13,33,55,0.08);
-  color: var(--navy);
+.mod-title em {
+  font-style: italic;
+  color: var(--gold-light);
 }
 
-.col-old .modernizar-col-title::before {
-  content: '✕';
-  font-size: 16px;
-}
-.col-new .modernizar-col-title::before {
-  content: '✓';
-  font-size: 16px;
-  color: var(--gold);
+.mod-subtitle {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.5);
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.7;
 }
 
+/* Comparación lado a lado */
+.mod-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-bottom: 0;
+}
+
+.mod-col {
+  padding: 3rem 2.5rem;
+}
+
+.mod-col-old {
+  background: rgba(255,255,255,0.02);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.mod-col-new {
+  background: rgba(201,168,76,0.04);
+  border-top: 1px solid rgba(201,168,76,0.15);
+}
+
+.mod-col-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.mod-col-old .mod-col-badge {
+  background: rgba(220,50,50,0.1);
+  color: #e87070;
+  border: 1px solid rgba(220,50,50,0.2);
+}
+
+.mod-col-new .mod-col-badge {
+  background: rgba(201,168,76,0.12);
+  color: var(--gold-light);
+  border: 1px solid rgba(201,168,76,0.25);
+}
+
+/* Mockups */
 .modernizar-mockup {
   border-radius: var(--radius-lg);
   overflow: hidden;
   margin-bottom: 2rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
 
 /* Old site mock */
 .mock-old {
   background: #f0ebe0;
-  border: 3px solid #ccc;
+  border: 3px solid #888;
   padding: 0;
   font-family: 'Times New Roman', serif;
+  position: relative;
+}
+
+.mock-old::before {
+  content: 'SITIO ANTICUADO';
+  position: absolute;
+  top: -1px; right: -1px;
+  background: #cc0000;
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 0 0 0 6px;
 }
 
 .mock-old-nav {
@@ -1052,7 +1157,24 @@ section { position: relative; }
 /* New site mock */
 .mock-new {
   background: var(--navy);
+  border: 1px solid rgba(201,168,76,0.2);
+  position: relative;
 }
+
+.mock-new::before {
+  content: '✦ SITIO MODERNO';
+  position: absolute;
+  top: -1px; right: -1px;
+  background: var(--gold);
+  color: var(--navy-deep);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 0 0 0 6px;
+}
+
 .mock-new-nav {
   padding: 12px 16px;
   display: flex;
@@ -1067,14 +1189,8 @@ section { position: relative; }
   font-weight: 700;
 }
 .mock-new-logo span { color: var(--gold); }
-.mock-new-links {
-  display: flex;
-  gap: 12px;
-}
-.mock-new-links a {
-  font-size: 9px;
-  color: rgba(255,255,255,0.7);
-}
+.mock-new-links { display: flex; gap: 12px; }
+.mock-new-links a { font-size: 9px; color: rgba(255,255,255,0.7); }
 .mock-new-btn {
   background: var(--gold);
   color: var(--navy-deep);
@@ -1095,11 +1211,7 @@ section { position: relative; }
   margin-bottom: 8px;
 }
 .mock-new-hero h2 em { color: var(--gold-light); font-style: italic; }
-.mock-new-hero p {
-  font-size: 10px;
-  color: rgba(255,255,255,0.6);
-  margin-bottom: 12px;
-}
+.mock-new-hero p { font-size: 10px; color: rgba(255,255,255,0.6); margin-bottom: 12px; }
 .mock-new-btns { display: flex; gap: 8px; justify-content: center; }
 .mock-btn-g {
   background: var(--gold);
@@ -1128,72 +1240,193 @@ section { position: relative; }
   padding: 10px;
   border: 1px solid rgba(255,255,255,0.08);
 }
-.mock-new-card-dot {
-  width: 20px; height: 20px;
-  border-radius: 6px;
-  margin-bottom: 6px;
-}
-.mock-new-card p {
-  font-size: 8px;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.4;
-}
-.mock-new-card strong {
-  display: block;
-  font-size: 10px;
-  color: var(--white);
-  margin-bottom: 3px;
-}
+.mock-new-card-dot { width: 20px; height: 20px; border-radius: 6px; margin-bottom: 6px; }
+.mock-new-card p { font-size: 8px; color: rgba(255,255,255,0.5); line-height: 1.4; }
+.mock-new-card strong { display: block; font-size: 10px; color: var(--white); margin-bottom: 3px; }
 
+/* Listas de comparación */
 .modernizar-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .modernizar-list li {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 14px;
   font-size: 0.95rem;
-  color: var(--text-dark);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
+.mod-col-old .modernizar-list li { color: rgba(255,255,255,0.55); }
+.mod-col-new .modernizar-list li { color: rgba(255,255,255,0.85); }
+
 .mi-icon {
-  width: 28px; height: 28px;
+  width: 26px; height: 26px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 12px;
   flex-shrink: 0;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
-.col-old .mi-icon { background: rgba(180,0,0,0.08); }
-.col-new .mi-icon { background: rgba(13,33,55,0.08); }
+.mod-col-old .mi-icon { background: rgba(220,50,50,0.12); }
+.mod-col-new .mi-icon { background: rgba(201,168,76,0.12); }
 
+/* Separador diagonal */
+.mod-divider {
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.15) 20%, rgba(201,168,76,0.5) 50%, rgba(201,168,76,0.15) 80%, transparent 100%);
+  position: relative;
+}
+
+/* CTA final — bloque de conversión prominente */
 .modernizar-cta {
-  grid-column: 1 / -1;
+  padding: 5rem 1.5rem;
   text-align: center;
-  margin-top: 2rem;
-  padding: 2.5rem;
-  background: var(--navy);
-  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, rgba(201,168,76,0.03) 50%, transparent 100%);
+  border-top: 1px solid rgba(201,168,76,0.12);
+}
+
+.modernizar-cta::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+  bottom: -200px; left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.mod-cta-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.mod-cta-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.25rem;
 }
 
 .modernizar-cta h3 {
+  font-family: 'Playfair Display', serif;
   color: var(--white);
-  font-size: 1.6rem;
-  margin-bottom: 0.75rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.modernizar-cta h3 em {
+  font-style: italic;
+  color: var(--gold-light);
 }
 
 .modernizar-cta p {
-  color: rgba(255,255,255,0.65);
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
+  color: rgba(255,255,255,0.55);
+  font-size: 1.05rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+}
+
+/* Botones CTA modernizar */
+.mod-cta-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Botón WhatsApp Business */
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: #25d366;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  box-shadow: 0 8px 30px rgba(37,211,102,0.3);
+}
+
+.btn-whatsapp:hover {
+  background: #1ebe5d;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(37,211,102,0.45);
+}
+
+.btn-whatsapp svg {
+  width: 22px; height: 22px;
+  fill: white;
+  flex-shrink: 0;
+}
+
+.btn-wa-label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.btn-wa-label small {
+  font-size: 10px;
+  font-weight: 400;
+  opacity: 0.85;
+  letter-spacing: 0.5px;
+}
+
+.btn-wa-label strong {
+  font-size: 15px;
+}
+
+/* Badge de garantía */
+.mod-guarantee {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.mod-guarantee-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.4);
+  font-size: 13px;
+}
+
+.mod-guarantee-item svg {
+  width: 16px; height: 16px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
 }
 
 /* ===========================
@@ -1565,8 +1798,10 @@ footer {
   .valor-grid { grid-template-columns: repeat(3, 1fr); }
   .niveles-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .modernizar-inner { grid-template-columns: 1fr; }
-  .modernizar-cta { grid-column: 1; }
+  .mod-comparison { grid-template-columns: 1fr; }
+  .mod-col-old { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .mod-cta-btns { flex-direction: column; align-items: center; }
+  .btn-whatsapp { width: 100%; max-width: 320px; justify-content: center; }
 }
 
 @media (max-width: 768px) {
@@ -2109,137 +2344,191 @@ footer {
 
 <!-- ========================= MODERNIZAR ========================= -->
 <section id="modernizar">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:3rem;" class="fade-up">
-      <span class="section-label">Identidad digital</span>
-      <h2 class="section-title">¿Tu colegio tiene la imagen que merece?</h2>
-      <p class="section-subtitle" style="margin:0 auto;">Los padres de hoy investigan en línea antes de llamar. Si tu sitio web no genera confianza inmediata, estás perdiendo inscripciones sin saberlo.</p>
+  <div class="mod-wrap">
+    <!-- Header -->
+    <div class="container">
+      <div class="mod-header fade-up">
+        <span class="mod-eyebrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          Identidad digital · Propuesta de diseño web
+        </span>
+        <h2 class="mod-title">¿Tu colegio tiene la imagen <em>que merece?</em></h2>
+        <p class="mod-subtitle">Los padres investigan en línea antes de llamar. Si tu sitio no genera confianza en los primeros 5 segundos, estás perdiendo inscripciones sin saberlo.</p>
+      </div>
     </div>
-    <div class="modernizar-inner fade-up">
+
+    <!-- Comparación lado a lado — ancho completo sin container -->
+    <div class="mod-comparison fade-up">
+
       <!-- Columna izquierda: sitio viejo -->
-      <div class="col-old">
-        <div class="modernizar-col-title">Sitio web desactualizado</div>
-        <div class="modernizar-mockup mock-old">
-          <div class="mock-old-nav">
-            <a href="#">Inicio</a>
-            <a href="#">Nosotros</a>
-            <a href="#">Niveles</a>
-            <a href="#">Contacto</a>
-            <a href="#">Mapa del sitio</a>
+      <div class="mod-col mod-col-old">
+        <div class="container" style="max-width:600px;margin:0 auto;">
+          <div class="mod-col-badge">
+            <span>✕</span> Sitio web desactualizado
           </div>
-          <div class="mock-old-body">
-            <div class="mock-old-banner">🔔 INSCRIPCIONES ABIERTAS 2025 — CUPO LIMITADO</div>
-            <div class="mock-old-content">
-              <div class="mock-old-sidebar">
-                <strong style="font-size:10px;display:block;margin-bottom:6px;">SECCIONES</strong>
-                <a href="#">▶ Preescolar</a>
-                <a href="#">▶ Primaria</a>
-                <a href="#">▶ Secundaria</a>
-                <a href="#">▶ Preparatoria</a>
-                <a href="#">▶ Galería</a>
-                <a href="#">▶ Solicitud</a>
-              </div>
-              <div class="mock-old-main">
-                <div class="mock-old-h">Bienvenidos al Colegio</div>
-                <p>Somos una institución educativa con más de 30 años de experiencia formando a las nuevas generaciones con valores y excelencia académica. Ofrecemos educación de calidad en todos los niveles...</p>
-                <div class="mock-old-counter">Visitas: 004,821</div>
+          <div class="modernizar-mockup mock-old">
+            <div class="mock-old-nav">
+              <a href="#">Inicio</a>
+              <a href="#">Nosotros</a>
+              <a href="#">Niveles</a>
+              <a href="#">Contacto</a>
+              <a href="#">Mapa del sitio</a>
+            </div>
+            <div class="mock-old-body">
+              <div class="mock-old-banner">🔔 INSCRIPCIONES ABIERTAS 2025 — CUPO LIMITADO</div>
+              <div class="mock-old-content">
+                <div class="mock-old-sidebar">
+                  <strong style="font-size:10px;display:block;margin-bottom:6px;">SECCIONES</strong>
+                  <a href="#">▶ Preescolar</a>
+                  <a href="#">▶ Primaria</a>
+                  <a href="#">▶ Secundaria</a>
+                  <a href="#">▶ Preparatoria</a>
+                  <a href="#">▶ Galería</a>
+                  <a href="#">▶ Solicitud</a>
+                </div>
+                <div class="mock-old-main">
+                  <div class="mock-old-h">Bienvenidos al Colegio</div>
+                  <p>Somos una institución educativa con más de 30 años de experiencia formando a las nuevas generaciones con valores y excelencia académica. Ofrecemos educación de calidad en todos los niveles...</p>
+                  <div class="mock-old-counter">Visitas: 004,821</div>
+                </div>
               </div>
             </div>
           </div>
+          <ul class="modernizar-list">
+            <li>
+              <span class="mi-icon">❌</span>
+              <span>Sin SEO: los padres no te encuentran cuando buscan "colegio privado" en tu ciudad</span>
+            </li>
+            <li>
+              <span class="mi-icon">❌</span>
+              <span>Se ve pésimo en celular — y el 78% de los padres investigan desde su smartphone</span>
+            </li>
+            <li>
+              <span class="mi-icon">❌</span>
+              <span>Sin formulario de contacto ni captura de prospectos automatizada</span>
+            </li>
+            <li>
+              <span class="mi-icon">❌</span>
+              <span>Imagen anticuada que comunica descuido y pérdida de confianza</span>
+            </li>
+            <li>
+              <span class="mi-icon">❌</span>
+              <span>Sin testimonios ni prueba social que convenza a los padres indecisos</span>
+            </li>
+          </ul>
         </div>
-        <ul class="modernizar-list">
-          <li>
-            <span class="mi-icon">❌</span>
-            <span>Sin optimización para Google: los padres no te encuentran cuando buscan "colegio privado" en tu ciudad</span>
-          </li>
-          <li>
-            <span class="mi-icon">❌</span>
-            <span>Se ve mal en celular: 78% de los padres investigan desde su smartphone</span>
-          </li>
-          <li>
-            <span class="mi-icon">❌</span>
-            <span>Sin formulario de contacto funcional ni seguimiento de prospectos</span>
-          </li>
-          <li>
-            <span class="mi-icon">❌</span>
-            <span>Imagen anticuada que comunica desatención y falta de inversión</span>
-          </li>
-          <li>
-            <span class="mi-icon">❌</span>
-            <span>Sin sección de testimonios ni prueba social que genere confianza</span>
-          </li>
-        </ul>
       </div>
+
       <!-- Columna derecha: sitio nuevo -->
-      <div class="col-new">
-        <div class="modernizar-col-title">Sitio web moderno (como este)</div>
-        <div class="modernizar-mockup mock-new">
-          <div class="mock-new-nav">
-            <span class="mock-new-logo">[LOGO DE TU MARCA] <span>Lumina</span></span>
-            <div class="mock-new-links">
-              <a>Propuesta</a>
-              <a>Niveles</a>
-              <a>Campus</a>
-            </div>
-            <span class="mock-new-btn">Agenda</span>
+      <div class="mod-col mod-col-new">
+        <div class="container" style="max-width:600px;margin:0 auto;">
+          <div class="mod-col-badge">
+            <span>✦</span> Sitio web moderno (como este)
           </div>
-          <div class="mock-new-hero">
-            <h2>Tu hijo merece una educación que <em>transforme</em></h2>
-            <p>Bilingüismo · Valores · Excelencia académica · Seguridad</p>
-            <div class="mock-new-btns">
-              <span class="mock-btn-g">Agenda una visita</span>
-              <span class="mock-btn-o">Ver propuesta</span>
+          <div class="modernizar-mockup mock-new">
+            <div class="mock-new-nav">
+              <span class="mock-new-logo">[LOGO DE TU MARCA] <span>Lumina</span></span>
+              <div class="mock-new-links">
+                <a>Propuesta</a>
+                <a>Niveles</a>
+                <a>Campus</a>
+              </div>
+              <span class="mock-new-btn">Agenda</span>
+            </div>
+            <div class="mock-new-hero">
+              <h2>Tu hijo merece una educación que <em>transforme</em></h2>
+              <p>Bilingüismo · Valores · Excelencia académica · Seguridad</p>
+              <div class="mock-new-btns">
+                <span class="mock-btn-g">Agenda una visita</span>
+                <span class="mock-btn-o">Ver propuesta</span>
+              </div>
+            </div>
+            <div class="mock-new-cards">
+              <div class="mock-new-card">
+                <div class="mock-new-card-dot" style="background:#c9a84c;"></div>
+                <strong>Bilingüismo real</strong>
+                <p>Maestros nativos certificados Cambridge</p>
+              </div>
+              <div class="mock-new-card">
+                <div class="mock-new-card-dot" style="background:#1e8449;"></div>
+                <strong>Seguridad</strong>
+                <p>CCTV y psicólogos en campus todo el día</p>
+              </div>
+              <div class="mock-new-card">
+                <div class="mock-new-card-dot" style="background:#884ea0;"></div>
+                <strong>Liderazgo</strong>
+                <p>Formación integral en valores y carácter</p>
+              </div>
             </div>
           </div>
-          <div class="mock-new-cards">
-            <div class="mock-new-card">
-              <div class="mock-new-card-dot" style="background:#c9a84c;"></div>
-              <strong>Bilingüismo real</strong>
-              <p>Maestros nativos certificados Cambridge</p>
-            </div>
-            <div class="mock-new-card">
-              <div class="mock-new-card-dot" style="background:#1e8449;"></div>
-              <strong>Seguridad</strong>
-              <p>CCTV y psicólogos en campus todo el día</p>
-            </div>
-            <div class="mock-new-card">
-              <div class="mock-new-card-dot" style="background:#884ea0;"></div>
-              <strong>Liderazgo</strong>
-              <p>Formación integral en valores y carácter</p>
-            </div>
-          </div>
+          <ul class="modernizar-list">
+            <li>
+              <span class="mi-icon">✅</span>
+              <span><strong style="color:var(--gold-light);">SEO optimizado:</strong> apareces primero cuando buscan "colegio privado" + tu ciudad</span>
+            </li>
+            <li>
+              <span class="mi-icon">✅</span>
+              <span><strong style="color:var(--gold-light);">100% responsive:</strong> perfecto en celular, tablet y computadora</span>
+            </li>
+            <li>
+              <span class="mi-icon">✅</span>
+              <span><strong style="color:var(--gold-light);">Formulario inteligente</strong> que captura leads y los envía a tu WhatsApp o CRM al instante</span>
+            </li>
+            <li>
+              <span class="mi-icon">✅</span>
+              <span><strong style="color:var(--gold-light);">Imagen premium</strong> que proyecta confianza y diferencia tu colegio desde el primer segundo</span>
+            </li>
+            <li>
+              <span class="mi-icon">✅</span>
+              <span><strong style="color:var(--gold-light);">Testimonios y prueba social</strong> que convierten visitantes en inscripciones reales</span>
+            </li>
+          </ul>
         </div>
-        <ul class="modernizar-list">
-          <li>
-            <span class="mi-icon">✅</span>
-            <span><strong>SEO optimizado:</strong> apareces en las primeras posiciones cuando buscan "colegio privado" + tu ciudad</span>
-          </li>
-          <li>
-            <span class="mi-icon">✅</span>
-            <span><strong>100% responsive:</strong> se ve perfecto en celular, tablet y computadora</span>
-          </li>
-          <li>
-            <span class="mi-icon">✅</span>
-            <span><strong>Formulario inteligente</strong> que captura leads y los envía a tu WhatsApp o CRM</span>
-          </li>
-          <li>
-            <span class="mi-icon">✅</span>
-            <span><strong>Imagen de marca premium</strong> que proyecta confianza desde el primer segundo</span>
-          </li>
-          <li>
-            <span class="mi-icon">✅</span>
-            <span><strong>Testimonios y prueba social</strong> que convierten visitantes en inscripciones</span>
-          </li>
-        </ul>
       </div>
-      <!-- CTA de modernización -->
-      <div class="modernizar-cta fade-up">
-        <h3>¿Quieres un sitio como este para tu colegio?</h3>
-        <p>Este sitio es una muestra de lo que podemos crear para tu institución. Personalizado con tus colores, logo, contenido y funcionalidades específicas.</p>
-        <a href="#contacto" class="btn btn-primary" style="margin:0 auto;">Solicitar mi propuesta gratis →</a>
+    </div><!-- /.mod-comparison -->
+
+    <!-- Línea divisora dorada -->
+    <div class="mod-divider"></div>
+
+    <!-- CTA de conversión -->
+    <div class="modernizar-cta fade-up">
+      <div class="mod-cta-inner">
+        <span class="mod-cta-tag">Hablemos de tu proyecto</span>
+        <h3>¿Quieres un sitio <em>como este</em> para tu colegio?</h3>
+        <p>Esta página es una muestra en vivo de lo que podemos crear para tu institución — personalizado con tus colores, logo, contenido real y funcionalidades a tu medida. Sin costos ocultos.</p>
+
+        <div class="mod-cta-btns">
+          <!-- WhatsApp Business -->
+          <a href="https://wa.me/522217522601?text=Hola%2C%20vi%20la%20demo%20de%20sitio%20web%20para%20colegios%20y%20me%20interesa%20saber%20m%C3%A1s%20sobre%20su%20propuesta." class="btn-whatsapp" target="_blank" rel="noopener">
+            <!-- Ícono oficial de WhatsApp en SVG -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            <div class="btn-wa-label">
+              <small>Escríbenos ahora — WhatsApp Business</small>
+              <strong>+52 221 752 2601</strong>
+            </div>
+          </a>
+
+        <!-- Garantías / micro-copy -->
+        <div class="mod-guarantee">
+          <span class="mod-guarantee-item">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Propuesta en 24 horas
+          </span>
+          <span class="mod-guarantee-item">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Sin compromiso de contratación
+          </span>
+          <span class="mod-guarantee-item">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Precio transparente desde el inicio
+          </span>
+        </div>
       </div>
     </div>
-  </div>
+
+  </div><!-- /.mod-wrap -->
 </section>
 
 <!-- ========================= CONTACTO ========================= -->
